@@ -3,10 +3,12 @@
 https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
 
 Create Role to manage EKS Cluster:
+
 Role Name: eksClusterRole
 Policy: AmazonEKSClusterPolicy
 
 Create Role to manage EC2 Worker nodes:
+
 Role Name: ec2ManageRole
 Policy: AmazonEKSWorkerNodePolicy, AmazonEKS_CNI_Policy, AmazonEC2ContainerRegistryReadOnly
 

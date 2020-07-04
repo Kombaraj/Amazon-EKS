@@ -1,9 +1,12 @@
 # How to install eksctl on Ubuntu
 
+Reference: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+
+
 Install the awscli:
 `sudo apt install awscli`
 
-Create an IAM account with programmatic access with administrator access to your aws account.
+Create an IAM account "awscli" with programmatic access with administrator access to your aws account.
 
 Run aws configure and include your newly created credentials and the region you wish to use. We use eu-west-1 as it supports EKS with Fargate.
 ```
@@ -32,6 +35,7 @@ Download and install kubectl with:
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin
+kubectl version
 ```
 
 And install the aws-iam-authenticator:
@@ -39,5 +43,6 @@ And install the aws-iam-authenticator:
 curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
 chmod +x ./aws-iam-authenticator
 sudo mv ./aws-iam-authenticator /usr/local/bin
+aws-iam-authenticator help
 ```
 

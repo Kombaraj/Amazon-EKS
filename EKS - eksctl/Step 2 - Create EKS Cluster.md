@@ -26,7 +26,7 @@ Included in this repository is some kubernetes configuration you can use to test
 Clone the repository and move to the learn-amazon-eks/hellonode folder
 ```
 git clone https://github.com/Kombaraj/Amazon-EKS.git
-cd academy-code-examples/learn-amazon-eks/hellonode/nodegroups
+cd Amazon-EKS\EKS - eksctl\hellonode\nodegroups
 ```
 
 Run kubectl apply on the files in the directory:

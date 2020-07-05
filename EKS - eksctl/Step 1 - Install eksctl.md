@@ -1,4 +1,4 @@
-# How to install eksctl on Ubuntu
+# How to install eksctl on Ubuntu OS
 
 Reference: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
 

@@ -1,10 +1,18 @@
-# How to install eksctl on Ubuntu
+# How to install eksctl on Ubuntu OS
 
 Reference: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
 
 
 Install the awscli:
 `sudo apt install awscli`
+
+(OR)
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
 
 Create an IAM account "awscli" with programmatic access with administrator access to your aws account.
 

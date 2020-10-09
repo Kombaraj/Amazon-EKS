@@ -1,0 +1,33 @@
+
+
+
+Pod Limit:
+https://github.com/awslabs/amazon-eks-ami/blob/master/files/eni-max-pods.txt
+https://medium.com/faun/aws-eks-and-pods-sizing-per-node-considerations-964b08dcfad3#:~:text=For%20example%2C%20if%20you%20have,is%20reserved%20for%20nodes%20itself.&text=You%20can%20see%20run%20the,how%20many%20Pods%20are%20running.
+
+
+I am thinking to form a small pool of team to have knowledge sharing of cutting edge technologies like Containers, Kubernetes, Service Mesh. I will try to share the knowledge I’ve gained from various sources but it’s purely knowledge sharing sessions that all can contribute. It’s 100% optional to participate 😊 😊 These sessions would be much helpful if you are planning to get certified on CNCF CKA or to gain working knowledge on Kubernetes. Thinking to have these sessions in the weekends.
+
+Let me know your participation.
+
+Some topics in mind as of now are:
+
+Containers basics
+Kubernetes basics
+Install and configure Kubernetes Cluster on laptop
+AWS Elastic Kubernetes Service (EKS) – Installation & Configuration
+Helm basics
+Kubernetes dashboard
+Deploy containerised applications into EKS
+Ingress Controllers 
+Authentication & Authorisation
+Serverless Kubernetes with Fargate
+Cluster Auto scalar
+Horizontal Pod Auto scaler
+Advanced Kubernetes Securities
+Istio Service Mesh
+
+society central
+
+Thanks,
+Kombaraj A

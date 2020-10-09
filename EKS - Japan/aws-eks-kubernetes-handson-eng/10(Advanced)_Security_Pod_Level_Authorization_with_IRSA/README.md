@@ -26,6 +26,9 @@ kubectl run --image curlimages/curl --restart Never --command curl -- /bin/sh -c
 
 ref: https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
 
+https://medium.com/@marcincuber/amazon-eks-with-oidc-provider-iam-roles-for-kubernetes-services-accounts-59015d15cb0c/
+
+
 
 ![alt text](../imgs/eks_irsa_2.png "K8s Architecture")
 

@@ -6,7 +6,14 @@ https://github.com/awslabs/amazon-eks-ami/blob/master/files/eni-max-pods.txt
 https://medium.com/faun/aws-eks-and-pods-sizing-per-node-considerations-964b08dcfad3#:~:text=For%20example%2C%20if%20you%20have,is%20reserved%20for%20nodes%20itself.&text=You%20can%20see%20run%20the,how%20many%20Pods%20are%20running.
 
 
-I am thinking to form a small pool of team to have knowledge sharing of cutting edge technologies like Containers, Kubernetes, Service Mesh. I will try to share the knowledge I’ve gained from various sources but it’s purely knowledge sharing sessions that all can contribute. It’s 100% optional to participate 😊 😊 These sessions would be much helpful if you are planning to get certified on CNCF CKA or to gain working knowledge on Kubernetes. Thinking to have these sessions in the weekends.
+
+PVC, PV
+https://www.kylezsembery.com/persistent-storage-kubernetes/
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fblog.exxactcorp.com%2Fwp-content%2Fuploads%2F2019%2F11%2Fnfs-k8s.jpg&imgrefurl=https%3A%2F%2Fblog.exxactcorp.com%2Fdeploying-dynamic-nfs-provisioning-in-kubernetes%2F&tbnid=_yFv34e2z0rZAM&vet=12ahUKEwivjeargrLsAhUWCrcAHVK7CcIQMygDegUIARClAQ..i&docid=19XhxlcShAHkAM&w=1280&h=720&q=kubernetes%20dynamic%20pvc%20pv&ved=2ahUKEwivjeargrLsAhUWCrcAHVK7CcIQMygDegUIARClAQ
+
+
+
+I am thinking to form a small pool of team to have knowledge sharing of cutting edge technologies like Containers, Kubernetes, Service Mesh. We will try to share the knowledge we’ve gained from various sources. It’s 100% optional to participate 😊 😊 These sessions would be much helpful if someone is planning to get certified on CNCF CKA or to gain working knowledge on Kubernetes. Thinking to have these sessions in the weekends.
 
 Let me know your participation.
 
@@ -25,9 +32,8 @@ Serverless Kubernetes with Fargate
 Cluster Auto scalar
 Horizontal Pod Auto scaler
 Advanced Kubernetes Securities
-Istio Service Mesh
+Service Mesh (Primarily Istio)
 
-society central
 
 Thanks,
 Kombaraj A

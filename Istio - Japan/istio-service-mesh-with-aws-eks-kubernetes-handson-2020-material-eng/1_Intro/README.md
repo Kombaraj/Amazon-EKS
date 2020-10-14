@@ -4,7 +4,7 @@
 Ref: https://istio.io/docs/concepts/what-is-istio/#what-is-a-service-mesh
 
 
-__Istio Service Mesh__ is a network connectivity (i.e. __mesh__) within Kubernetes cluster created by __Envoy proxy__ containers, be it a standalone or a sidecar proxy:
+__Istio Service Mesh__ is a network connectivity (i.e. __mesh__) within Kubernetes cluster created by __Envoy proxy__ containers, be it a standalone or a sidecar proxy :
 ![alt text](../imgs/eks_aws_architecture_with_apps_ingress_istio_virtual_service.png "")
 
 
@@ -25,7 +25,7 @@ Ref: https://istio.io/latest/docs/ops/deployment/architecture/
 Brief Architectural Summary of Istio:
 ![alt text](../imgs/eks_aws_architecture_with_apps_ingress_istiod.png "")
 
-![alt text](../imgs/istio_architecture.svg "Istio Architecture")
+![alt text](../imgs/istio_architecture.png "Istio Architecture")
 
 - service-mesh implementations comes with a __control plane__(istiod) and a __data plane__(a standalone edge Envoy proxy and sidecar Envoy proxies)
 - __data plane__ is composed of a set of intelligent proxies (__Envoy__) deployed as sidecars.  These proxies mediate and control all network communication between microservices. They also collect and report telemetry on all mesh traffic.
@@ -113,7 +113,7 @@ Benefits:
 - [Security](https://istio.io/docs/concepts/security/)
     - transparently secure traffic behind the firewall ([Auto mutual TLS among backend services](https://istio.io/docs/tasks/security/authentication/authn-policy/#auto-mutual-tls), [which doubels the latency at max or max 10ms](https://github.com/istio/tools/tree/3ac7ab40db8a0d595b71f47b8ba246763ecd6213/perf/benchmark#run-performance-tests), [also explained in Istio best practice blog](https://istio.io/blog/2019/performance-best-practices/#3-measure-with-and-without-proxies))
       ![alt text](../imgs/istio_mesh_mtls.png "")
-      ![alt text](../imgs/istio_tls.svg "Istio TLS")
+      ![alt text](../imgs/istio_tls.png "Istio TLS")
     - end-to-end authentication and authorization using JWT
       ![alt text](../imgs/istio_requestauthentication_authorizationpolicy_jwt.png "")
     - ![alt text](../imgs/istio_performance_latency.png "Istio Latency")

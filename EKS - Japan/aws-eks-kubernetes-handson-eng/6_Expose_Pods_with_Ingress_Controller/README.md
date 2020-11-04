@@ -37,6 +37,21 @@ kubectl create namespace nginx-ingress-controller
 helm install nginx-ingress-controller stable/nginx-ingress -n nginx-ingress-controller
 ```
 
+### ---- Updated ---- ###
+ 
+NGINX Ingress Controller
+```sh
+$ helm repo add nginx-stable https://helm.nginx.com/stable
+$ helm repo update
+
+
+kubectl create namespace nginx-ingress
+$ helm install my-release nginx-stable/nginx-ingress -n nginx-ingress
+```
+### ---- Updated ---- ###
+
+
+
 Output
 ```bash
 NAME: nginx-ingress-controller

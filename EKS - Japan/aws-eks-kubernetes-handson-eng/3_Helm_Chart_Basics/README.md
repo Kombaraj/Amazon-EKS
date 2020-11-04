@@ -11,8 +11,12 @@ choco install kubernetes-helm
 helm version
 ```
 
-## Helm Overview
-![alt text](../imgs/helm_architecture.jpg "K8s Architecture")
+
+## Helm version 2 Architecture 
+![alt text](../imgs/helm2-arch.png )
+
+## Helm version 3 Architecture
+![alt text](../imgs/helm3-arch.png )
 
 - __externalize values__ in k8s resources (pod, deployment, service) into `values.yaml`
 - package __multiple k8s resource files__ into a single wrapper object called helm chart

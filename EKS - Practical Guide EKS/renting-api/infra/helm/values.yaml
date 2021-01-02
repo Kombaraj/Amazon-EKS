@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: mariomerco/renting-api
+  repository: nginx
   tag: latest
   pullPolicy: Always
 

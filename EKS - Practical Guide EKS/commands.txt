@@ -1,0 +1,17 @@
+cd Infrastructure/eksctl/01-initial-cluster/
+eksctl create cluster -f cluster.yaml
+[  eksctl create nodegroup -f cluster.yaml  ]
+
+cd Infrastructure/k8s-tooling/1-external-dns/
+kubectl apply -f 01-initial-external-dns.yaml 
+kubectl apply -f 02-testing-external-dns.yaml 
+
+kubectl delete -f 02-testing-external-dns.yaml
+
+cd Infrastructure/k8s-tooling/2-alb-controller/
+kubectl apply -f alb-ingress-controller.yaml 
+
+
+
+
+

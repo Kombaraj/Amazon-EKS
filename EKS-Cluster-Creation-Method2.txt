@@ -1,0 +1,81 @@
+Create EKS Cluster:
+
+eksctl create cluster \
+    --name eks-from-eksctl \
+    --version 1.20 \
+    --region us-east-1 \
+	--zones us-east-1a,us-east-1b,us-east-1c \
+    --nodegroup-name workers \
+    --node-type t3.medium \
+    --nodes 1 \
+    --nodes-min 1 \
+    --nodes-max 2 \
+    --ssh-access \
+    --ssh-public-key kube.pub \
+    --managed
+	
+	
+Delete EKS Cluster:
+
+eksctl delete cluster \
+    --name eks-from-eksctl \
+    --region us-east-1 
+	
+	
+***********************************************************************************	
+	
+**** Kubernetes Dashboard ****
+	
+	
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+kubectl describe secret $(kubectl get secret -n kubernetes-dashboard | grep kubernetes-dashboard-token | awk '{ print $1 }') -n kubernetes-dashboard
+
+kubectl proxy
+
+# access this url from browser
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eks-admin
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: eks-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: eks-admin
+  namespace: kube-system
+  
+  
+kubectl apply -f eks-admin-service-account.yaml
+
+
+Get a token from the `eks-admin` serviceaccount
+
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
+
+kubectl proxy
+
+# access this url from browser
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl delete -f eks-admin-service-account.yaml
+
+**** Kubernetes Dashboard ****
+

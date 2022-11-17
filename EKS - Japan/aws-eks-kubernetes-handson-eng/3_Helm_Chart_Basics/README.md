@@ -114,6 +114,12 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 
 Search charts in repo
 ```bash
+# Search repo locally
+helm search repo 
+
+# Search repo from Helm Hub
+helm search repo hub nginx
+
 helm search repo stable
 
 # this is nginx for ingress controller

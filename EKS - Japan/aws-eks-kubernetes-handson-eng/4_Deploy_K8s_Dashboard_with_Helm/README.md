@@ -3,7 +3,7 @@
 
 # 4.1 Required setup 1: Install Metrics Server first so Dashboard can poll metrics
 ```
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
 Check metrics-server deployment
@@ -23,7 +23,7 @@ Refs:
 - https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
 Output shows resources created in `kubernetes-dashboard` namespace
@@ -46,7 +46,7 @@ deployment.apps/dashboard-metrics-scraper created
 
 Get token (kinda like password) for dashboard
 ```
-kubectl describe secret $(k get secret -n kubernetes-dashboard | grep kubernetes-dashboard-token | awk '{ print $1 }') -n kubernetes-dashboard
+kubectl describe secret $(kubectl get secret -n kubernetes-dashboard | grep kubernetes-dashboard-token | awk '{ print $1 }') -n kubernetes-dashboard
 ```
 
 Create a secure channel from local to API server in Kubernetes cluster
@@ -117,7 +117,7 @@ Now dashboard shows full metrics in all namespaces
 
 ## Uninstall Dashboard
 ```
-kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 
 kubectl delete -f eks-admin-service-account.yaml
 ```

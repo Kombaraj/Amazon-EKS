@@ -1,0 +1,67 @@
+Ref: https://github.com/Kombaraj/Amazon-EKS/tree/master/EKS%20-%20Rajdheep
+
+Create EKS Cluster:
+
+eksctl create cluster --name eksctl-test --nodegroup-name ng-default --node-type t3.micro --nodes 2
+
+eksctl get cluster
+kubectl get nodes
+
+
+To additional NodeGroup:
+
+eksctl-create-ng.yaml
+--- 
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eksctl-test
+  region: us-east-2
+
+nodeGroups:
+  - name: ng1-public
+    instanceType: t3.micro
+    desiredCapacity: 2
+  
+managedNodeGroups:
+  - name: ng2-managed
+    instanceType: t3.micro
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 2  
+	
+eksctl create nodegroup --config-file=eksctl-create-ng.yaml
+
+eksctl get nodegroup --cluster=eksctl-test
+
+**************************************
+
+Another way to create cluster using config file:
+
+eksctl-create-cluster.yaml
+--- 
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: config-file
+  region: us-west-2
+
+nodeGroups:
+  - name: ng-default
+    instanceType: t3.micro
+    desiredCapacity: 2
+	
+eksctl create cluster --config-file=eksctl-create-cluster.yaml
+
+****************************************
+
+Delete the cluster:
+eksctl delete cluster --name=eksctl-test
+
+
+****************************************
+Create EKS cluster with Managed NodeGroup:
+eksctl create cluster --name demoeks --version 1.19 --nodegroup-name demoeks-nodes --node-type t3.micro --nodes 3 --managed
+

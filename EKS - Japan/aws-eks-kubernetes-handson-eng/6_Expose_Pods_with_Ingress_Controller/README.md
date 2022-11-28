@@ -9,13 +9,13 @@ Previously, we saw `guestbook` service was exposed as of type `LoadBalancer`.
 
 Get `guestbook` service 
 ```
-kubectl get service guestbook
+kubectl get service frontend
 ```
 
 Output
 ```
-NAME        TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)          AGE
-guestbook   LoadBalancer   10.100.36.45   a24ac71d1c2e046f59e46720494f5322-359345983.us-west-2.elb.amazonaws.com   3000:30604/TCP   39m
+NAME       TYPE           CLUSTER-IP      EXTERNAL-IP                                                              PORT(S)        AGE
+frontend   LoadBalancer   10.100.17.225   a90ef0cc5b2d34a93977ecbd793eafc9-800048549.us-east-1.elb.amazonaws.com   80:30733/TCP   34m
 ```
 
 There are a few __downsides__ of service of type `LoadBalancer`:

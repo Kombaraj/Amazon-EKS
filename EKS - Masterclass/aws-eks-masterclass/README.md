@@ -1,5 +1,7 @@
 # AWS EKS - Elastic Kubernetes Service - Masterclass
 
+[![Image](https://stacksimplify.com/course-images/AWS-EKS-Kubernetes-Masterclass-DevOps-Microservices-course.png "AWS EKS Kubernetes - Masterclass")](https://www.udemy.com/course/aws-eks-kubernetes-masterclass-devops-microservices/?referralCode=257C9AD5B5AF8D12D1E1)
+
 ## Course Modules
 
 | S.No | AWS Service Name |
@@ -176,4 +178,8 @@
 ## Stack Simplify Udemy Profile
 - [Udemy Profile](https://www.udemy.com/user/kalyan-reddy-9/)
 
+
+# Azure Kubernetes Service with Azure DevOps and Terraform 
+
+[![Image](https://stacksimplify.com/course-images/azure-kubernetes-service-with-azure-devops-and-terraform.png "Azure Kubernetes Service with Azure DevOps and Terraform")](https://www.udemy.com/course/azure-kubernetes-service-with-azure-devops-and-terraform/?referralCode=2499BF7F5FAAA506ED42)
 

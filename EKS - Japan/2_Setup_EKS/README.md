@@ -203,6 +203,8 @@ Shared responsibility model for EKS
 
 # 2.10 Delete EKS Cluster:
 
+```bash
 eksctl delete cluster \
     --name eks-from-eksctl \
     --region us-east-1 
+```    

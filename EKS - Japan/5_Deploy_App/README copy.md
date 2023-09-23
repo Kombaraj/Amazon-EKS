@@ -15,18 +15,44 @@ Backend Redis
 - multi slaves (read)
 - slaves sync continuously from master
 
-# 5.3 Deploy frontend app (Download the raw YAML)
+# 5.1 Deploy Redis Master
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook/all-in-one/guestbook-all-in-one.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-controller.json
 
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-service.json
 ```
 
+# 5.2 Deploy Redis Slave
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-controller.json
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-service.json
+```
+
+# 5.3 Deploy frontend app
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-controller.json
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-service.json
+```
+
+Show `replicationcontroller` (which is deprecated k8s resource succeeded by `replicaset` now)created
+```
+kubectl get replicationcontroller
+```
+
+Output
+```
+NAME           DESIRED   CURRENT   READY   AGE
+guestbook      3         3         3       15m
+redis-master   1         1         1       16m
+redis-slave    2         2         2       15m
+```
 
 Get service and pod
 ```
 kubectl get pod,service
 ```
-
 
 Output
 ```
@@ -54,12 +80,6 @@ service/redis-slave    ClusterIP      10.100.103.40   <none>
 
        6379/TCP         16m
 ```
-# Change Frontend service type from NodePort to LoadBalancer
-```
-kubectl apply -f guestbook-all-in-one.yaml
-
-kubectl get services
-```
 
 # 5.4 Get external ELB DNS
 ```
@@ -82,5 +102,5 @@ Visit it from browser __after 3-5 minutes when ELB is ready__
 
 #### How to Uninstall all the resources (don't do it yet, as we will expose these pods with Ingress in the next chapter)
 ```
-kubectl delete -f guestbook-all-in-one.yaml
+kubectl delete -f examples/guestbook-go
 ```

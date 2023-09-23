@@ -3,7 +3,6 @@
 ## Install Helm v3 (tiller is deprecated)
 Ref: https://helm.sh/docs/intro/install/
 ```bash
-brew install helm
 
 # Windows
 choco install kubernetes-helm

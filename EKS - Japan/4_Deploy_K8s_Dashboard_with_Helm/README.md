@@ -2,13 +2,16 @@
 ![alt text](../imgs/k8s_dashboard_admin_permission.png "K8s Architecture")
 
 # 4.1 Required setup 1: Install Metrics Server first so Dashboard can poll metrics
+Refs:
+- https://github.com/kubernetes-sigs/metrics-server/releases/
 ```
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.4/components.yaml
 ```
 
 Check metrics-server deployment
 ```bash
 kubectl get deployment metrics-server -n kube-system
+
 ```
 
 Output
@@ -19,11 +22,11 @@ metrics-server   1/1     1            1           82s
 
 # 4.2 Required setup 2: Install Dashboard v2.0.0
 Refs: 
-- https://kubernetes.github.io/dashboard/
+- https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 - https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
 Output shows resources created in `kubernetes-dashboard` namespace
@@ -46,7 +49,7 @@ deployment.apps/dashboard-metrics-scraper created
 
 Get token (kinda like password) for dashboard
 ```
-kubectl describe secret $(k get secret -n kubernetes-dashboard | grep kubernetes-dashboard-token | awk '{ print $1 }') -n kubernetes-dashboard
+kubectl describe secret $(kubectl get secret -n kubernetes-dashboard | grep kubernetes-dashboard-token | awk '{ print $1 }') -n kubernetes-dashboard
 ```
 
 Create a secure channel from local to API server in Kubernetes cluster
@@ -62,28 +65,6 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 This is because the default service account `serviceaccount/kubernetes-dashboard` doesn't have much permission to view resources.
 
 # 4.3 Required setup 3: Create RBAC to control what metrics can be visible
-
-[eks-admin-service-account.yaml](eks-admin-service-account.yaml)
-```
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: eks-admin
-  namespace: kube-system
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: eks-admin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin # this is the cluster admin role
-subjects:
-- kind: ServiceAccount
-  name: eks-admin
-  namespace: kube-system
-```
 
 Apply
 ```

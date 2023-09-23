@@ -24,7 +24,8 @@ There are a few __downsides__ of service of type `LoadBalancer`:
 
 
 Enters `INGRESS` K8s resource
-![alt text](../imgs/ingress.png "K8s Ingress")
+
+<img src="../imgs/ingress.png" width="800" />
 
 # 6.1 Create Ingress Controller (Nginx) using Helm Chart
 Refs: 

@@ -14,6 +14,7 @@ cd -
 ```bash
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 ```
+Or check out the installation page: https://helm.sh/docs/intro/install/
 
 ## Check/Update
 

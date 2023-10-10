@@ -1,0 +1,35 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJWU5oMmVBVm1aaFl3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpBNU1qa3dOelF6TlRKYUZ3MHpNekE1TWpZd056UXpOVEphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUUMzVjhNWGFFWS9QMm1lT1RGSFlnVnA5OTRGdE9PL1BYUTlNSlVOa1VKSEZwb2l1cnBSVUI0VzZJYk4KUFpqOUJOMjNhSVB1eXVydnc1NDBHNEphZTF5Mkh1ems2NTlxZkcyeG1GSFhEQnBmZ1BNalh1QTFEaGZ0Qk1TSwpza0xHblpyQ1NzY2JySUQwRFBFVTd3dVNaZEt6eTVCY2lZbXJ1SHQra1NrM0VRVnN1am5ybnJ3dnFFd3NOQURVCmgvTmZ5MlZSWmthbFBTNWRiWU1WQnFKbWNFQW5wbDVwUmEyQnZJMVNBZko0Q2xtV21iUG1OWXFFZEl3Qm5iMksKYWlkYVlnSDhtVTkzOUR3RlZVTWtka1RBS2t5ZDN1Y3hmN2ZmU21jck95K1FMbG1mMzh5S0Nra1N1aXk2Q1BvMwprYmxZOE9aNi9UU1NIUU9OSjEzWjY4cEtEenRqQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUTmlCa1lGbjJNK0NCM0VJTXd4NUc3clJjWXh6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUc3YUt5OGI0VgpxcGd5alI2bkxjWXFQUmdybVJxazJpVWxvVC9sNmpjVU9HK29Yd3gyclhJazVzVXptMUZ6Ymt2b1dUMEdYUjExCjd4WDVyd05Sd1JJMk9uY2pRblNUQjhFeXh4YlU3UXlQa0FqYUl5Y2VGNDdHR3U3N0dCb1NyTElsTUJxQ0xQa1AKS1hhVW1uVmRiUVhJT0FlNEh4ZVdNV1VNRXRiS2haRmNCbUh2Z0REYno2ZXluTElzQmdqN0I0QllsbDhBQ1F0RApmaHVPN0Jseno3OFlSQTNENyswcUV3VnVQcmJLSkJsY21nV1BueEFRWXBuZXRuY3N0ZzZUblJ4dy9ldnhQeTgxCjd0Z1hUdXpBdUtSaE5sMWkybXN0RlhVQmJuSVhZTjVpUHQzUEdnY0orUFRKMUdoRHNjSEJONEQrRFNXSTN0bHcKS3ZEVENvWkdzOEU2Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://EBB65F4BBC9AE4DF53785B9BA5E09924.gr7.us-east-1.eks.amazonaws.com
+  name: EKS-course-cluster.us-east-1.eksctl.io
+contexts:
+- context:
+    cluster: EKS-course-cluster.us-east-1.eksctl.io
+    user: eks-course@EKS-course-cluster.us-east-1.eksctl.io
+  name: eks-course@EKS-course-cluster.us-east-1.eksctl.io
+current-context: eks-course@EKS-course-cluster.us-east-1.eksctl.io
+kind: Config
+preferences: {}
+users:
+- name: eks-course@EKS-course-cluster.us-east-1.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - eks
+      - get-token
+      - --output
+      - json
+      - --cluster-name
+      - EKS-course-cluster
+      - --region
+      - us-east-1
+      command: aws
+      env:
+      - name: AWS_STS_REGIONAL_ENDPOINTS
+        value: regional
+      - name: AWS_PROFILE
+        value: eks-course
+      provideClusterInfo: false

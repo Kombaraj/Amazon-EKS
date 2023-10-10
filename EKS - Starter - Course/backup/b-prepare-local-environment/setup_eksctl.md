@@ -2,7 +2,7 @@
 
 ## Installation
 for non-Linux OS you can find a binary download here:
-
+https://github.com/weaveworks/eksctl - for win, linux, mac instructions (up-to-date)
 https://github.com/weaveworks/eksctl/releases
 
 on Linux, you can just execute:

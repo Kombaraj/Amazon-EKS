@@ -9,5 +9,6 @@ eksctl utils update-cluster-logging --config-file eks-course.yaml --approve
 ## disable via plain commandline call
 
 ```bash
-eksctl utils update-cluster-logging --name=EKS-course-cluster --disable-types all
+eksctl utils update-cluster-logging --cluster=EKS-course-cluster --disable-types
+all --approve
 ```

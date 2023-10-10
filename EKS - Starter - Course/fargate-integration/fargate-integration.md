@@ -5,5 +5,5 @@
 ## add Fargate support to existing EKS cluster
 
 ```bash
-eksctl create fargateprofile -f ./fargate-profile.yaml
+eksctl create fargateprofile -f fargate-profile.yaml
 ```

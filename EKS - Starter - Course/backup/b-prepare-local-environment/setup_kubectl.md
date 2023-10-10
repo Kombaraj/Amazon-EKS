@@ -2,6 +2,9 @@
 
 ## install _kubectl
 
+Follow instructions from here: https://kubernetes.io/docs/tasks/tools/
+
+
 * kubectl
   * on RH based Linux:  
   

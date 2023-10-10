@@ -1,4 +1,4 @@
-# create namespace
+ # create namespace
 ```
 kubectl create namespace ns-eks-course-efs
 ```
@@ -14,7 +14,8 @@ replace your *EFS-ID* and *EFS-DNS name* in file _create-efs-provisioner.yaml_
 The corresponding commands are:  
 ```
 kubectl apply -f create-rbac.yaml --namespace=ns-eks-course-efs
-kubectl apply -f create-efs-provisioner.yaml --namespace=ns-eks-course-efs
+helm repo add aws-efs-csi-driver  https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+kubectl get pod -n default -l app.kubernetes.io/name=aws-efs-csi-driver,app.kubernetes.io/instance=aws-efs-csi-driver
 kubectl apply -f create-storage.yaml --namespace=ns-eks-course-efs
 ```
 
@@ -53,3 +54,4 @@ kubectl describe service wordpress --namespace=ns-eks-course-efs | grep Ingress
 or goto AWS console => EC2
 
 ```
+

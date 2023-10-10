@@ -3,7 +3,7 @@ kind: ClusterConfig
 
 metadata:
   name: EKS-course-cluster
-  region: us-east-1
+  region: us-west-2
 
 nodeGroups:
   - name: ng-1
@@ -11,6 +11,3 @@ nodeGroups:
     desiredCapacity: 3
     ssh: # use existing EC2 key
       publicKeyName: eks-course
-cloudWatch:
-  clusterLogging:
-    enableTypes: ["api", "audit", "authenticator"]

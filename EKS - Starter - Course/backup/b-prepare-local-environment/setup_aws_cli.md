@@ -1,4 +1,8 @@
 # Prerequisites
+**Important: follow instructions from here: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+Notes:
+ on Mac to open the aws/credentials file:
+   ```bash sudo code ~/.aws/credentials```
 
 * Python3 or Python2.7.9+
 * Python Pip3 / Pip

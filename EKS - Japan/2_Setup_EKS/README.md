@@ -141,6 +141,7 @@ eksctl create cluster \
     --name eks-from-eksctl \
     --version 1.25 \
     --region us-east-1 \
+    --zones us-east-1a,us-east-1b \
     --nodegroup-name workers \
     --node-type t2.medium \
     --nodes 1 \

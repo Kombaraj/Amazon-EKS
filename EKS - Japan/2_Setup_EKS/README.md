@@ -154,6 +154,11 @@ eksctl create cluster \
 Once you have created a cluster, you will find that cluster credentials were added in ~/.kube/config
 
 ```bash
+# Verify AWS Credentials
+cat ~/.aws/credentials
+export AWS_PROFILE=eks-demo
+aws sts get-caller-identity
+
 # get info about cluster resources
 aws eks describe-cluster --name eks-from-eksctl --region us-east-1
 ```

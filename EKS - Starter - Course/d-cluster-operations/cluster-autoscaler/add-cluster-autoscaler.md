@@ -8,7 +8,7 @@ The cluster autoscaler automatically launches additional worker nodes if more re
 eksctl create nodegroup --config-file=eks-course.yaml
 
 # change to folder d-cluster-operations/nodegroup-and-spot-instances then run the below command
-eksctl delete nodegroup --cluster=EKS-course-cluster --name=ng-1 --approve
+eksctl delete nodegroup --cluster=EKS-course-cluster --name=ng-1 
 ```
 
 ## deploy the autoscaler
@@ -67,6 +67,9 @@ kubectl get pods -o wide --watch
 
 ```bash
 kubectl get nodes
+kubectl get nodes -l instance-type=spot
+
+kubectl scale deployment test-autoscaler --replicas=3
 ```
 
 ### view cluster autoscaler logs

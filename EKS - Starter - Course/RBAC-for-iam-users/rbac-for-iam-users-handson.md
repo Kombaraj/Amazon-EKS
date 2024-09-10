@@ -14,6 +14,7 @@ Execution:
 fetch current configmap before adding our user mapping
 
 ```bash
+kubectl -n kube-system get configmap
 kubectl -n kube-system get configmap aws-auth -o yaml > aws-auth-configmap.yaml
 ```
 

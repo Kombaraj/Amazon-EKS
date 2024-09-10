@@ -25,11 +25,16 @@ kubectl apply -f admin-service-account.yaml
 
 ### access the dashboard
 * get a security token
-```kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-course-admin | awk '{print $1}')
+
+```
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-course-admin | awk '{print $1}')
 ```
 record the output of ```token:```
 
-* start kube proxy via ```kubectl proxy```
+* start kube proxy via 
+```
+kubectl proxy
+```
 
 * open browser at `http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login`
 

@@ -14,4 +14,16 @@ Scaling Nodegroups -> d-cluster-operations/nodegroup-and-spot-instances/nodegrou
 
 Cluster Autoscaler -> d-cluster-operations/cluster-autoscaler/add-cluster-autoscaler.md
 
+CloudWatch Logging for EKS Cluster Services -> cloudwatch-integration/cloudwatch-logging/enable-cloudwatch-logging.md
+
+## Section 5: Helm Package Manager on EKS
+Helm Overview and Installation -> c-EKS-Setup/c.c-Helm/installing-helm.md
+
+## Section 6: Managing Users & RBAC in EKS
+Create Kubernetes Admin user -> RBAC-for-iam-users/rbac-for-iam-users-handson.md
+
+## Section 7: EKS in depth
+
+## Section 8: Deploy the Kubernetes Dashboard
+ 
 

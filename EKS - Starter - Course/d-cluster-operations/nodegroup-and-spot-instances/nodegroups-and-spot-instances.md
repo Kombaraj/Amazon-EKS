@@ -22,13 +22,13 @@ eksctl create nodegroup --config-file=eks-course.yaml --include='ng-mixed'
 
 ## scaling a nodegroup
 
-to scale the nodegroup _ng-1_ from 3 to 5 nodes, execute:
+to scale the nodegroup _ng-1_ from 5 to 3 nodes, execute:
 
 ```bash
 eksctl scale nodegroup \
   --cluster EKS-course-cluster \
-  --nodes 5 \
-  --nodes-max 5 \
+  --nodes 3 \
+  --nodes-max 3 \
   --name ng-1
 
 eksctl get nodegroup --cluster EKS-course-cluster  

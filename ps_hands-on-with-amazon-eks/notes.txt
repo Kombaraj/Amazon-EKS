@@ -1,0 +1,4 @@
+git clone https://github.com/kombaraj/amazon-eks.git
+
+cd amazon-eks/ps_hands-on-with-amazon-eks
+

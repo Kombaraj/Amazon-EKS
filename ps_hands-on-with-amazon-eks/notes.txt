@@ -10,10 +10,9 @@ cd amazon-eks/ps_hands-on-with-amazon-eks
 # Install EKS Cluster
 ./script-by-chapter/chapter-1.sh
 
-# Install AWS Loadbalancer Controller
+# Install AWS Loadbalancer Controller & create IAM Policy for ELB access
 cd ./Infrastructure/k8s-tooling/load-balancer-controller
 ./create.sh
-
 
 To make EKS Worker nodes to communicate with Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
 

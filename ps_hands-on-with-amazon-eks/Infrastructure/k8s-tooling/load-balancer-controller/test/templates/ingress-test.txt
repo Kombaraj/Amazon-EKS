@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     alb.ingress.kubernetes.io/load-balancer-name: my-alb
-    #alb.ingress.kubernetes.io/group.name: my-group
+    #alb.ingress.kubernetes.io/group.name: eks-node-group
     alb.ingress.kubernetes.io/target-type: instance
     alb.ingress.kubernetes.io/scheme: internet-facing
 {{- if not .Values.ssl.enabled }}
@@ -17,6 +17,7 @@ metadata:
   labels:
     app: nginx
 spec:
+  ingressClassName: alb
   rules:
     - http:
         paths:

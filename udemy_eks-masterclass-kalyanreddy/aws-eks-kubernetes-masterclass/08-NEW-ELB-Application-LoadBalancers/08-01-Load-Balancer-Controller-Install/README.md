@@ -41,12 +41,6 @@ eksctl create cluster --name=eksdemo1 \
 # Get List of clusters (Section-01-02)
 eksctl get cluster   
 
-# Template (Section-01-02)
-eksctl utils associate-iam-oidc-provider \
-    --region region-code \
-    --cluster <cluter-name> \
-    --approve
-
 # Replace with region & cluster name (Section-01-02)
 eksctl utils associate-iam-oidc-provider \
     --region us-east-1 \

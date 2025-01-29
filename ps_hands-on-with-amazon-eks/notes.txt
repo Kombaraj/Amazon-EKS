@@ -21,7 +21,6 @@ cd test
 
 Validate ALB created and accessible
 
-
 # Create ACM SSL certificate
 cd ./Infrastructure/clouformation/ssl-certificate
 ./create.sh

@@ -88,7 +88,7 @@ eksctl delete cluster eksdemo1
 eksctl create cluster --name=eksdemo1 \
                       --region=us-east-1 \
                       --zones=us-east-1a,us-east-1b \
-                      --version="1.21" \
+                      --version="1.27" \
                       --without-nodegroup 
 
 
@@ -122,6 +122,8 @@ eksctl create nodegroup --cluster=eksdemo1 \
 # Create IAM Policy
 # Create IAM policy for the AWS Load Balancer Controller that allows it to make calls to AWS APIs on your behalf.
 
+cd udemy_eks-masterclass-kalyanreddy/aws-eks-kubernetes-masterclass/08-NEW-ELB-Application-LoadBalancers/08-01-Load-Balancer-Controller-Install
+
 # Download IAM Policy
 curl -o iam_policy_latest.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
 ## Verify latest
@@ -142,7 +144,7 @@ eksctl create iamserviceaccount \
   --cluster=eksdemo1 \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
-  --attach-policy-arn=arn:aws:iam::180789647333:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::766354255780:policy/AWSLoadBalancerControllerIAMPolicy \
   --override-existing-serviceaccounts \
   --approve
 
@@ -163,7 +165,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=vpc-0165a396e41e292a3 \
+  --set vpcId=vpc-0e25910cb33a207e9 \
   --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller
 
 # Verify that the controller is installed.
@@ -185,18 +187,61 @@ kubectl -n kube-system logs -f  aws-load-balancer-controller-86b598cbd6-5pjfk
 # Review IngressClass Kubernetes Manifest
 File Location: 08-01-Load-Balancer-Controller-Install/kube-manifests/01-ingressclass-resource.yaml
 
+
 # Create IngressClass Resource
 # Navigate to Directory
 cd 08-01-Load-Balancer-Controller-Install
 
 # Create IngressClass Resource
-kubectl apply -f kube-manifests
+kubectl apply -f kube-manifests/
 
 # Verify IngressClass Resource
 kubectl get ingressclass
 
 # Describe IngressClass Resource
 kubectl describe ingressclass my-aws-ingress-class
+
+
+
+# Deploy kube-manifests of simple Ingress Object with default backend and Verify
+
+cd 08-02-ALB-Ingress-Basics
+kubectl apply -f 01-kube-manifests-default-backend/
+
+# Verify Application Load Balancer using 
+Goto AWS Mgmt Console -> Services -> EC2 -> Load Balancers
+1. Verify Listeners and Rules inside a listener
+2. Verify Target Groups
+
+# Access App using Browser
+kubectl get ingress
+http://<ALB-DNS-URL>
+http://<ALB-DNS-URL>/app1/index.html
+
+
+# Ingress kube-manifest with Ingress Rules
+cd 08-02-ALB-Ingress-Basics
+kubectl apply -f 02-kube-manifests-rules/
+
+# Verify the App using Browser
+
+## 08-03-ALB-Ingress-ContextPath-Based-Routing
+
+
+cd 08-03-ALB-Ingress-ContextPath-Based-Routing
+kubectl apply -f kube-manifests/
+# Access Application
+http://<ALB-DNS-URL>/app1/index.html
+http://<ALB-DNS-URL>/app2/index.html
+http://<ALB-DNS-URL>/
+
+## 08-04-ALB-Ingress-SSL
+	Register your own domain in Route53 (Optional)
+	Create certificate in AWS Certificate Manager (*.YourDomain.com)
+
+# Note down the annotations in the ingress manifest
+cd 08-04-ALB-Ingress-SSL
+kubectl apply -f kube-manifests/
 
 
 

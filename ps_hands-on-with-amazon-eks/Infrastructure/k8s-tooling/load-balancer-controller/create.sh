@@ -18,4 +18,4 @@ curl -o iam_policy_latest.json https://raw.githubusercontent.com/kubernetes-sigs
 
 aws iam create-policy \
     --policy-name aws-load-balancer-iam-policy \
-    --policy-document file://iam-policy.json
+    --policy-document file://iam_policy_latest.json

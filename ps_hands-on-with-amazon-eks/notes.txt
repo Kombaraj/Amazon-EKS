@@ -2,10 +2,12 @@ git clone https://github.com/kombaraj/amazon-eks.git
 
 chmod -R 700 amazon-eks
 
-cd amazon-eks/ps_hands-on-with-amazon-eks
+cd amazon-eks
 
-# Install nano, eksctl, helm
-./script-by-chapter/prepare-cloud-shell.sh
+# Install nano, eksctl, helm, kubectl, terraform
+./pre-requisites.sh
+
+cd ps_hands-on-with-amazon-eks
 
 # Install EKS Cluster
 ./script-by-chapter/chapter-1.sh
@@ -14,7 +16,9 @@ cd amazon-eks/ps_hands-on-with-amazon-eks
 cd ./Infrastructure/k8s-tooling/load-balancer-controller
 ./create.sh
 
-To make EKS Worker nodes to communicate with Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
+# To make EKS Worker nodes to communicate with ALB Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
+# So, update the map-iam-policy-to-ng-instance-role.sh with policy ARN and EKS NodeGroup NodeInstanceRole. Then execute the script as below:
+./map-iam-policy-to-ng-instance-role.sh
 
 cd test
 ./run.sh
@@ -24,4 +28,16 @@ Validate ALB created and accessible
 # Create ACM SSL certificate
 cd ./Infrastructure/clouformation/ssl-certificate
 ./create.sh
+
+# To make EKS Worker nodes to communicate with Route53, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
+# So, update the map-iam-policy-to-ng-instance-role.sh with AWS Managed AmazonRoute53FullAccess policy and EKS NodeGroup NodeInstanceRole. Then execute the script as below:
+./map-iam-policy-to-ng-instance-role.sh
+
+
+# Update A Record in Route53 - MANUAL Way
+# Route 53 => Create Record => "sample-app".999999999.realhandsonlabs.net 
+#         => Alias => Select the AWS ALB Loadbalancer
+
+# Update A Record in Route53 - AUTOMATED Way
+
 

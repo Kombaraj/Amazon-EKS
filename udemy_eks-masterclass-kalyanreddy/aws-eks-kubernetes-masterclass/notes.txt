@@ -245,6 +245,21 @@ kubectl apply -f kube-manifests/
 
 
 
+## 08-05-ALB-Ingress-SSL-Redirect
+
+
+## 08-06-Deploy-ExternalDNS-on-EKS
+
+Create IAM Policy with permissions to access Route53
+Create IAM Role, k8s Service Account & Associate IAM Policy using eksctl tool
+Note down the IAM Role ARN created from the above step
+Update External DNS Kubernetes manifest
+  IAM Role update
+  Get latest Docker Image name
+Deploy External DNS Kubernetes manifest
+
+cd 08-06-Deploy-ExternalDNS-on-EKS
+kubectl apply -f kube-manifests/
 
 
 

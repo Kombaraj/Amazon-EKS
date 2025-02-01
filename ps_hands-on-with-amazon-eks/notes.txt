@@ -46,6 +46,24 @@ Test the app: sample-app.999999999.realhandsonlabs.net
 
 Remove the manually created record entry in Route53
 
+# Create Service Account for ExternalDNS
+
+cd ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
+
+aws iam create-policy \
+    --policy-name aws-load-balancer-iam-policy \
+    --policy-document file://AllowExternalDNS-R53.json
+
+# Replaced name, namespace, cluster, IAM Policy arn 
+eksctl create iamserviceaccount \
+    --name external-dns \
+    --namespace default \
+    --cluster eksdemo1 \
+    --attach-policy-arn <<IAM Policy ARN from previous step>> \
+    --approve \
+    --override-existing-serviceaccounts
+
+
 # Install External DNS
 cd ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
 ./create.sh

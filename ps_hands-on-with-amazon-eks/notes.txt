@@ -19,7 +19,7 @@ eksctl utils associate-iam-oidc-provider \
     --approve
 
 # Install AWS Loadbalancer Controller & create IAM Policy for ELB access
-cd ./Infrastructure/k8s-tooling/load-balancer-controller
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller
 ./create.sh
 
 # To make EKS Worker nodes to communicate with ALB Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
@@ -35,10 +35,10 @@ Validate ALB created and accessible
 ## Secure Loadbalancing for EKS
 
 # Create ACM SSL certificate
-cd ./Infrastructure/clouformation/ssl-certificate
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/clouformation/ssl-certificate
 ./create.sh
 
-cd ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller/test
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller/test
 ./run-with-ssl.sh
 
 # Update A Record in Route53 - MANUAL Way
@@ -54,11 +54,11 @@ Remove the manually created record entry in Route53
 
 # Create Service Account for ExternalDNS
 
-cd ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
 
 # Install External DNS
 
-cd ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
 ./create.sh
 
 # Override the external-dns service account by providing necessary access to Route 53
@@ -75,4 +75,70 @@ eksctl create iamserviceaccount \
     --approve \
     --override-existing-serviceaccounts
 
+
+## Create DynamoDB tables
+
+# client-api table
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/clients-api/infra/cloudformation
+./create-dynamodb-table.sh
+
+# inventory-api table
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/inventory-api/infra/cloudformation
+./create-dynamodb-table.sh
+
+# renting-api table
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/renting-api/infra/cloudformation
+./create-dynamodb-table.sh
+
+# resource-api table
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/cloudformation
+./create-dynamodb-table.sh
+
+# IAM Policy mapped to NodeGroup Instance Role to get access to DynamoDB
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling
+./map-iam-policy-to-ng-instance-role.sh
+
+## Install Book Store App
+
+# front-end
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/front-end/infra/helm
+./create.sh
+
+# client-api 
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/client-api/infra/helm
+./create.sh
+
+# inventory-api
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/inventory-api/infra/helm
+./create.sh
+
+# renting-api
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/renting-api/infra/helm
+./create.sh
+
+# resource-api
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/helm
+./create.sh
+
+Verify Route53 entries and validate the Book Store App
+
+
+===>
+Clean up
+1) external-dns service accoount cloudformation stack
+2) Uninstall the sample-app
+    helm ininstall sample-app 
+3) ssl-certificate cloudformation stack
+    aws cloudformation delete-stack --stack-name ssl-certificate
+4) Uninstall External DNS
+    helm uninstall external-dns
+5) Uninstall AWS Loadbalancer Controller
+    helm uninstall -n kube-system aws-load-balancer-controller
+6) Uninstall NodeGroup
+    aws cloudformation delete-stack --stack-name eksctl-eks-acg-nodegroup-eks-node-group
+7) Uninstall EKS Cluster
+    aws cloudformation delete-stack --stack-name eksctl-eks-acg-cluster
+
+
+Route53 entries should be removed
 

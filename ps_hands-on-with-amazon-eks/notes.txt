@@ -10,7 +10,7 @@ cd amazon-eks
 cd ps_hands-on-with-amazon-eks
 
 # Install EKS Cluster
-./script-by-chapter/chapter-1.sh
+./scripts-by-chapter/chapter-1.sh
 
 # Create & Associate IAM OIDC Provider for our EKS Cluster
 eksctl utils associate-iam-oidc-provider \
@@ -24,7 +24,7 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-bala
 
 # To make EKS Worker nodes to communicate with ALB Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
 # So, update the map-iam-policy-to-ng-instance-role.sh with policy ARN and EKS NodeGroup NodeInstanceRole. Then execute the script as below:
-./map-iam-policy-to-ng-instance-role.sh
+./map-iam-policy-to-ng-instance-role.sh <<IAM Policy ARN generated in the previous step>> <<Node IUnstance Role>>
 
 cd test
 ./run.sh
@@ -35,7 +35,7 @@ Validate ALB created and accessible
 ## Secure Loadbalancing for EKS
 
 # Create ACM SSL certificate
-cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/clouformation/ssl-certificate
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/cloudformation/ssl-certificate
 ./create.sh
 
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller/test
@@ -52,9 +52,6 @@ Test the app: sample-app.999999999.realhandsonlabs.net
 
 Remove the manually created record entry in Route53
 
-# Create Service Account for ExternalDNS
-
-cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
 
 # Install External DNS
 
@@ -96,7 +93,7 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/cloudformation
 
 # IAM Policy mapped to NodeGroup Instance Role to get access to DynamoDB
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling
-./map-iam-policy-to-ng-instance-role.sh
+./map-iam-policy-to-ng-instance-role.sh <<Node Instance Role>>
 
 ## Install Book Store App
 
@@ -105,7 +102,7 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/front-end/infra/helm
 ./create.sh
 
 # client-api 
-cd ~/amazon-eks/ps_hands-on-with-amazon-eks/client-api/infra/helm
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/clients-api/infra/helm
 ./create.sh
 
 # inventory-api

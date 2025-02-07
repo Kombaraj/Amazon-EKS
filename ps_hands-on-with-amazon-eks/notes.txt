@@ -133,6 +133,11 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/cni
 # Terminate the existing worker nodes and wait for sometime to provision new worker nodes
 # Check the Pods are now loaded in the Secondary CIDR
 
+### The Principle of Least Privilege - IRSA
+
+
+
+
 
 ===>
 Clean up

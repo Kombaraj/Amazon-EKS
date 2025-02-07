@@ -23,8 +23,8 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-bala
 ./create.sh
 
 # To make EKS Worker nodes to communicate with ALB Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
-# So, update the map-iam-policy-to-ng-instance-role.sh with policy ARN and EKS NodeGroup NodeInstanceRole. Then execute the script as below:
-./map-iam-policy-to-ng-instance-role.sh <<IAM Policy ARN generated in the previous step>> <<Node IUnstance Role>>
+# So, Execute the script map-iam-policy-to-ng-instance-role.sh 
+./map-iam-policy-to-ng-instance-role.sh
 
 cd test
 ./run.sh
@@ -119,9 +119,25 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/helm
 
 Verify Route53 entries and validate the Book Store App
 
+### EKS and CNI add-on
+
+# Amazon VPC CNI add-on is configured while setup the cluster. Please validate in the AWS EKS Console in Add-ons section.
+# aws-node-XXXX pods Amazon VPC CNI add-on running in all nodes
+kubectl get pods -n kube-system
+kubectl describe pod aws-node-XXXX -n kube-system
+
+# Create new Secondary VPC CIDR and associate it to the existing VPC
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/cni
+./setup.sh
+
+# Terminate the existing worker nodes and wait for sometime to provision new worker nodes
+# Check the Pods are now loaded in the Secondary CIDR
+
 
 ===>
 Clean up
+helm uninstall sample-app
+
 1) external-dns service accoount cloudformation stack
 2) Uninstall the sample-app
     helm ininstall sample-app 

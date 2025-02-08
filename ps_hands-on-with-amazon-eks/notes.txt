@@ -19,8 +19,10 @@ eksctl utils associate-iam-oidc-provider \
     --approve
 
 # Install AWS Loadbalancer Controller & create IAM Policy for ELB access
+kubectl get deploy,svc,pod -n kube-system
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller
 ./create.sh
+kubectl get deploy,svc,pod -n kube-system
 
 # To make EKS Worker nodes to communicate with ALB Loadbalancer, map the IAM Policy ARN which just created to the NodeInstanceRole created from eks-acg-nodegroup Cloudformation templete
 # So, Execute the script map-iam-policy-to-ng-instance-role.sh 
@@ -30,13 +32,14 @@ cd test
 ./run.sh
 
 Validate ALB created and accessible
-
+kubectl get deploy,svc,pod
 
 ## Secure Loadbalancing for EKS
 
 # Create ACM SSL certificate
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/cloudformation/ssl-certificate
 ./create.sh
+# Validate if certificate created in AWS Certificate Manager (ACM)
 
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller/test
 ./run-with-ssl.sh
@@ -58,20 +61,15 @@ Remove the manually created record entry in Route53
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns
 ./create.sh
 
-# Override the external-dns service account by providing necessary access to Route 53
-aws iam create-policy \
-    --policy-name allow-externaldns-r53-iam-policy \
-    --policy-document file://AllowExternalDNS-R53.json
+# Check the external-dns pod and delete it to re-create
+kubectl get pods
+kubectl delete pod external-dns-XXXX
+kubectl get pods
 
-# Replaced name, namespace, cluster, IAM Policy arn 
-eksctl create iamserviceaccount \
-    --name external-dns \
-    --namespace default \
-    --cluster eks-acg \
-    --attach-policy-arn <<IAM Policy ARN from previous step>> \
-    --approve \
-    --override-existing-serviceaccounts
-
+# Now validate Route53 if new entries for sample-app created
+helm uninstall sample-app
+# Loadbalancer will be destroyed now
+# Route53 entries are not deleted yet. Delete it manually as 'upsert' mode in ExternalDNS is not working
 
 ## Create DynamoDB tables
 
@@ -117,6 +115,7 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/renting-api/infra/helm
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/helm
 ./create.sh
 
+kubectl get deploy,svc,pod -n development
 Verify Route53 entries and validate the Book Store App
 
 ### EKS and CNI add-on

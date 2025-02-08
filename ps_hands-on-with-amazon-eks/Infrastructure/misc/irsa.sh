@@ -1,3 +1,5 @@
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks
+
 # Create IAM Policies of Bookstore Microservices
     ( cd clients-api/infra/cloudformation && ./create-iam-policy.sh ) & \
     ( cd resource-api/infra/cloudformation && ./create-iam-policy.sh ) & \

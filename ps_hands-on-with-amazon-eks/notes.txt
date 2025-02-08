@@ -91,13 +91,9 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/cloudformation
 
 # IAM Policy mapped to NodeGroup Instance Role to get access to DynamoDB
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling
-./map-iam-policy-to-ng-instance-role.sh <<Node Instance Role>>
+./map-iam-policy-to-ng-instance-role.sh 
 
 ## Install Book Store App
-
-# front-end
-cd ~/amazon-eks/ps_hands-on-with-amazon-eks/front-end/infra/helm
-./create.sh
 
 # client-api 
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/clients-api/infra/helm
@@ -115,6 +111,10 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks/renting-api/infra/helm
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/helm
 ./create.sh
 
+# front-end
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/front-end/infra/helm
+./create.sh
+
 kubectl get deploy,svc,pod -n development
 Verify Route53 entries and validate the Book Store App
 
@@ -129,14 +129,20 @@ kubectl describe pod aws-node-XXXX -n kube-system
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/cni
 ./setup.sh
 
+kubectl get ENIConfig
+kubectl get pods -o wide -n development
+# Note down the Pod IPs
+
 # Terminate the existing worker nodes and wait for sometime to provision new worker nodes
 # Check the Pods are now loaded in the Secondary CIDR
+kubectl get pods -o wide -n development
+# Note down the Pod IPs
 
 ### The Principle of Least Privilege - IRSA
+# OIDC Provider configurations already done earlier
 
-
-
-
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/misc
+./irsa.sh
 
 ===>
 Clean up

@@ -144,6 +144,86 @@ kubectl get pods -o wide -n development
 cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/misc
 ./irsa.sh
 
+
+### Chapter 4 - More Power for Less Money
+# Spot Instances
+
+eksctl get nodegroups --cluster eks-acg
+
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/eksctl/02-spot-instances/
+cat cluster.yaml
+eksctl create nodegroup -f cluster.yaml
+
+kubectl get nodes
+eksctl get nodegroups --cluster eks-acg
+# New nodegroup created. Both nodegroups are "unmanaged"
+
+# Verify Spot Instances in EC2 console
+
+# Delete the first existing nodegroup
+eksctl delete nodegroup eks-node-group --cluster eks-acg
+eksctl get nodegroups --cluster eks-acg
+
+# Spot Instances and Node Termination Handler
+kubectl get nodes
+kubectl describe node <node1>
+# Check the label "lifecycle=Ec2Spot"
+
+# Install Termination Handler
+helm repo add eks https://aws.github.io/eks-charts
+helm install aws-node-termination-handler \
+            --namespace kube-system \
+            eks/aws-node-termination-handler
+
+# 3 node termination handler pods running now
+kubectl get pods -n kube-system
+
+
+
+# EKS Managed Node Groups
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/eksctl/03-managed-nodes
+cat cluster.yaml
+eksctl get nodegroup --cluster eks-acg
+# Currently one unmanaged nod group is present with is spot Instances
+eksctl create nodegroup -f cluster.yaml
+
+kubectl get nodes
+eksctl get nodegroup --cluster eks-acg
+# Now both unmanaged and managed node groups present
+# Check EKS cluster in the console and look at "Node Groups" section.
+
+# Delete Spot NodeGroup
+eksctl delete nodegroup --cluster <spot node group>
+# Pods will be evicted to new nodes ?? Check this out
+
+
+## EKS and Fargate
+cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/eksctl/04-fargate
+cat cluster.yaml
+
+# Create Fargate Profile
+eksctl create fargateprofile -f cluster.yaml
+
+# Check "Fargate Profiles" section in EKS Console
+# Currently the pods are running in managed node groups
+kubectl get pods -n development -o wide
+
+# Delete all pods
+kubectl get pods -n development
+kubectl get pods -n development | grep Running | awk '{print $1}'
+kubectl delete pods -n development `!!` # This will take output from previous command and run
+
+# Wait for sometime
+kubectl get pods -n development -o wide
+# Now the pods scheduled on Fargate
+
+
+
+### Continuous Integration and Continuous Deploymnt (CI/CD)
+
+
+
+
 ===>
 Clean up
 helm uninstall sample-app

@@ -1,10 +1,9 @@
-cd ~/amazon-eks/ps_hands-on-with-amazon-eks
 
 # Create IAM Policies of Bookstore Microservices
-    ( cd clients-api/infra/cloudformation && ./create-iam-policy.sh ) & \
-    ( cd resource-api/infra/cloudformation && ./create-iam-policy.sh ) & \
-    ( cd inventory-api/infra/cloudformation && ./create-iam-policy.sh ) & \
-    ( cd renting-api/infra/cloudformation && ./create-iam-policy.sh ) &
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/clients-api/infra/cloudformation && ./create-iam-policy.sh ) & \
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/cloudformation && ./create-iam-policy.sh ) & \
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/inventory-api/infra/cloudformation && ./create-iam-policy.sh ) & \
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/renting-api/infra/cloudformation && ./create-iam-policy.sh ) &
 
     wait
 
@@ -39,10 +38,10 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks
     wait
 
 # Upgrading the applications
-    ( cd ./resource-api/infra/helm-v2 && ./create.sh ) & \
-    ( cd ./clients-api/infra/helm-v2 && ./create.sh ) & \
-    ( cd ./inventory-api/infra/helm-v2 && ./create.sh ) & \
-    ( cd ./renting-api/infra/helm-v2 && ./create.sh ) &
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/resource-api/infra/helm-v2 && ./create.sh ) & \
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/clients-api/infra/helm-v2 && ./create.sh ) & \
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/inventory-api/infra/helm-v2 && ./create.sh ) & \
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/renting-api/infra/helm-v2 && ./create.sh ) &
 
     wait
 
@@ -52,17 +51,17 @@ cd ~/amazon-eks/ps_hands-on-with-amazon-eks
     helm del -n kube-system aws-load-balancer-controller # Uninstall first
     aws_load_balancer_iam_policy=$(aws cloudformation describe-stacks --stack aws-load-balancer-iam-policy --query "Stacks[0].Outputs[0]" | jq .OutputValue | tr -d '"')
     aws iam detach-role-policy --role-name ${nodegroup_iam_role} --policy-arn ${aws_load_balancer_iam_policy}
-    ( cd ./Infrastructure/k8s-tooling/load-balancer-controller && ./create-irsa.sh )
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/load-balancer-controller && ./create-irsa.sh )
 
 # Updating IRSA for External DNS
     
     helm del external-dns # Uninstall first
     external_dns_iam_policy="arn:aws:iam::aws:policy/AmazonRoute53FullAccess"
     aws iam detach-role-policy --role-name ${nodegroup_iam_role} --policy-arn ${external_dns_iam_policy}
-    ( cd ./Infrastructure/k8s-tooling/external-dns && ./create-irsa.sh )
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/external-dns && ./create-irsa.sh )
 
 
 # Updating IRSA for VPC CNI
     vpc_cni_iam_policy="arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
     aws iam detach-role-policy --role-name ${nodegroup_iam_role} --policy-arn ${vpc_cni_iam_policy}
-    ( cd ./Infrastructure/k8s-tooling/cni && ./setup-irsa.sh )
+    ( cd ~/amazon-eks/ps_hands-on-with-amazon-eks/Infrastructure/k8s-tooling/cni && ./setup-irsa.sh )
